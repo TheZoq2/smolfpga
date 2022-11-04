@@ -1,60 +1,165 @@
-module e_proj_cell_cell_test_harness (
+module e_proj_main_cell_test (
         input clk_i,
-        input x_i,
-        input y_i,
+        input[4:0] inputs_i,
         input cfg_clk_i,
         input cfg_value_i,
+        output[7:0] output__
+    );
+    `ifdef COCOTB_SIM
+    string __top_module;
+    string __vcd_file;
+    initial begin
+        if ($value$plusargs("TOP_MODULE=%s", __top_module) && __top_module == "e_proj_main_cell_test" && $value$plusargs("VCD_FILENAME=%s", __vcd_file)) begin
+            $dumpfile (__vcd_file);
+            $dumpvars (0, e_proj_main_cell_test);
+        end
+        #1;
+    end
+    `endif
+    logic clk_n89;
+    assign clk_n89 = clk_i;
+    logic[4:0] inputs_n90;
+    assign inputs_n90 = inputs_i;
+    logic cfg_clk_n91;
+    assign cfg_clk_n91 = cfg_clk_i;
+    logic cfg_value_n92;
+    assign cfg_value_n92 = cfg_value_i;
+    (* src = "src/main.spade:13,16" *)
+    logic _e_131;
+    logic[1:0] _e_133_o;
+    (* src = "src/main.spade:11,17" *)
+    logic[1:0] chain_n93;
+    logic[1:0] chain_n93_o;
+    logic[2:0] _e_139;
+    (* src = "src/main.spade:19,12" *)
+    logic _e_137;
+    logic[2:0] _e_142;
+    (* src = "src/main.spade:20,12" *)
+    logic _e_140;
+    (* src = "src/main.spade:17,29" *)
+    logic[2:0] _e_146;
+    logic[1:0] _e_146_o;
+    logic _e_151;
+    logic[1:0] chain_n95;
+    logic[1:0] chain_n95_o;
+    (* src = "src/main.spade:25,9" *)
+    logic[1:0] _e_147_o;
+    logic[1:0] _e_149;
+    logic[7:0] _e_154;
+    logic[7:0] _e_156;
+    (* src = "src/main.spade:27,5" *)
+    logic[7:0] _e_150;
+    assign _e_131 = cfg_value_n92;
+    
+    assign chain_n93 = {cfg_clk_n91, _e_131};
+    assign {_e_133_o} = chain_n93_o;
+    assign _e_139 = 0;
+    assign _e_137 = inputs_n90[_e_139];
+    assign _e_142 = 1;
+    assign _e_140 = inputs_n90[_e_142];
+    (* src = "src/main.spade:17,29" *)
+    e_proj_cell_cell _e_146_i(clk_n89, _e_137, _e_140, chain_n93, chain_n93_o, _e_146, _e_146_o);
+    assign _e_151 = _e_146[2];
+    assign chain_n95 = _e_146[1:0];
+    assign _e_146_o[1:0] = chain_n95_o;
+    assign chain_n95_o[1:0] = _e_147_o;
+    assign _e_149 = 0;
+    assign _e_147_o = _e_149;
+    assign _e_154 = 1;
+    assign _e_156 = 0;
+    assign _e_150 = _e_151 ? _e_154 : _e_156;
+    assign output__ = _e_150;
+endmodule
+
+module e_std_io_rising_edge (
+        input clk_i,
+        input sync1_i,
         output output__
     );
     `ifdef COCOTB_SIM
     string __top_module;
     string __vcd_file;
     initial begin
-        if ($value$plusargs("TOP_MODULE=%s", __top_module) && __top_module == "e_proj_cell_cell_test_harness" && $value$plusargs("VCD_FILENAME=%s", __vcd_file)) begin
+        if ($value$plusargs("TOP_MODULE=%s", __top_module) && __top_module == "e_std_io_rising_edge" && $value$plusargs("VCD_FILENAME=%s", __vcd_file)) begin
             $dumpfile (__vcd_file);
-            $dumpvars (0, e_proj_cell_cell_test_harness);
+            $dumpvars (0, e_std_io_rising_edge);
         end
         #1;
     end
     `endif
-    logic clk_n81;
-    assign clk_n81 = clk_i;
-    logic x_n82;
-    assign x_n82 = x_i;
-    logic y_n83;
-    assign y_n83 = y_i;
-    logic cfg_clk_n84;
-    assign cfg_clk_n84 = cfg_clk_i;
-    logic cfg_value_n85;
-    assign cfg_value_n85 = cfg_value_i;
-    (* src = "src/cell.spade:44,16" *)
-    logic _e_111;
-    logic[1:0] _e_113_o;
-    (* src = "src/cell.spade:42,13" *)
-    logic[1:0] c_n86;
-    logic[1:0] c_n86_o;
-    (* src = "src/cell.spade:48,24" *)
-    logic[2:0] _e_122;
-    logic[1:0] _e_122_o;
-    logic _e_126;
-    logic[1:0] chain_n88;
-    logic[1:0] chain_n88_o;
-    (* src = "src/cell.spade:49,9" *)
-    logic[1:0] _e_123_o;
-    logic[1:0] _e_125;
-    assign _e_111 = cfg_value_n85;
-    
-    assign c_n86 = {cfg_clk_n84, _e_111};
-    assign {_e_113_o} = c_n86_o;
-    (* src = "src/cell.spade:48,24" *)
-    e_proj_cell_cell _e_122_i(clk_n81, x_n82, y_n83, c_n86, c_n86_o, _e_122, _e_122_o);
-    assign _e_126 = _e_122[2];
-    assign chain_n88 = _e_122[1:0];
-    assign _e_122_o[1:0] = chain_n88_o;
-    assign chain_n88_o[1:0] = _e_123_o;
-    assign _e_125 = 1;
-    assign _e_123_o = _e_125;
-    assign output__ = _e_126;
+    logic clk_n54;
+    assign clk_n54 = clk_i;
+    logic sync1_n55;
+    assign sync1_n55 = sync1_i;
+    (* src = "build/spade/stdlib/io.spade:3,14" *)
+    reg sync2_n56;
+    (* src = "build/spade/stdlib/io.spade:4,14" *)
+    logic _e_6;
+    (* src = "build/spade/stdlib/io.spade:4,5" *)
+    logic _e_4;
+    always @(posedge clk_n54) begin
+        sync2_n56 <= sync1_n55;
+    end
+    assign _e_6 = !sync2_n56;
+    assign _e_4 = sync1_n55 && _e_6;
+    assign output__ = _e_4;
+endmodule
+
+module e_proj_config_chain_cfg_bit (
+        input[1:0] chain_i, output[1:0] chain_o,
+        output[2:0] output__,
+        input[1:0] input__
+    );
+    `ifdef COCOTB_SIM
+    string __top_module;
+    string __vcd_file;
+    initial begin
+        if ($value$plusargs("TOP_MODULE=%s", __top_module) && __top_module == "e_proj_config_chain_cfg_bit" && $value$plusargs("VCD_FILENAME=%s", __vcd_file)) begin
+            $dumpfile (__vcd_file);
+            $dumpvars (0, e_proj_config_chain_cfg_bit);
+        end
+        #1;
+    end
+    `endif
+    logic[1:0] chain_n61;
+    assign chain_n61 = chain_i;
+    logic[1:0] chain_n61_o;
+    assign chain_o = chain_n61_o;
+    (* src = "src/config_chain.spade:11,9" *)
+    logic _e_28;
+    (* src = "src/config_chain.spade:11,29" *)
+    logic _e_30;
+    (* src = "src/config_chain.spade:11,20" *)
+    reg value_n62;
+    (* src = "src/config_chain.spade:14,14" *)
+    logic _e_34;
+    (* src = "src/config_chain.spade:15,16" *)
+    logic _e_36;
+    (* src = "src/config_chain.spade:16,16" *)
+    logic[1:0] _e_38_o;
+    (* src = "src/config_chain.spade:13,21" *)
+    logic[1:0] new_chain_n63;
+    logic[1:0] new_chain_n63_o;
+    (* src = "src/config_chain.spade:18,6" *)
+    logic _e_42;
+    (* src = "src/config_chain.spade:18,6" *)
+    logic[2:0] _e_41;
+    logic[1:0] _e_41_o;
+    assign _e_28 = chain_n61[1];
+    assign _e_30 = chain_n61[0];
+    always @(posedge _e_28) begin
+        value_n62 <= _e_30;
+    end
+    assign _e_34 = chain_n61[1];
+    assign _e_36 = value_n62;
+    assign chain_n61_o[1:0] = _e_38_o;
+    assign new_chain_n63 = {_e_34, _e_36};
+    assign {_e_38_o} = new_chain_n63_o;
+    assign _e_42 = value_n62;
+    assign _e_41 = {_e_42, new_chain_n63};
+    assign {new_chain_n63_o} = _e_41_o;
+    assign output__ = _e_41;
+    assign _e_41_o = input__;
 endmodule
 
 module e_proj_cell_cell (
@@ -238,166 +343,61 @@ module e_std_io_falling_edge (
     assign output__ = _e_12;
 endmodule
 
-module e_std_io_rising_edge (
+module e_proj_cell_cell_test_harness (
         input clk_i,
-        input sync1_i,
+        input x_i,
+        input y_i,
+        input cfg_clk_i,
+        input cfg_value_i,
         output output__
     );
     `ifdef COCOTB_SIM
     string __top_module;
     string __vcd_file;
     initial begin
-        if ($value$plusargs("TOP_MODULE=%s", __top_module) && __top_module == "e_std_io_rising_edge" && $value$plusargs("VCD_FILENAME=%s", __vcd_file)) begin
+        if ($value$plusargs("TOP_MODULE=%s", __top_module) && __top_module == "e_proj_cell_cell_test_harness" && $value$plusargs("VCD_FILENAME=%s", __vcd_file)) begin
             $dumpfile (__vcd_file);
-            $dumpvars (0, e_std_io_rising_edge);
+            $dumpvars (0, e_proj_cell_cell_test_harness);
         end
         #1;
     end
     `endif
-    logic clk_n54;
-    assign clk_n54 = clk_i;
-    logic sync1_n55;
-    assign sync1_n55 = sync1_i;
-    (* src = "build/spade/stdlib/io.spade:3,14" *)
-    reg sync2_n56;
-    (* src = "build/spade/stdlib/io.spade:4,14" *)
-    logic _e_6;
-    (* src = "build/spade/stdlib/io.spade:4,5" *)
-    logic _e_4;
-    always @(posedge clk_n54) begin
-        sync2_n56 <= sync1_n55;
-    end
-    assign _e_6 = !sync2_n56;
-    assign _e_4 = sync1_n55 && _e_6;
-    assign output__ = _e_4;
-endmodule
-
-module e_proj_main_cell_test (
-        input clk_i,
-        input[4:0] inputs_i,
-        input cfg_clk_i,
-        input cfg_value_i,
-        output[7:0] output__
-    );
-    `ifdef COCOTB_SIM
-    string __top_module;
-    string __vcd_file;
-    initial begin
-        if ($value$plusargs("TOP_MODULE=%s", __top_module) && __top_module == "e_proj_main_cell_test" && $value$plusargs("VCD_FILENAME=%s", __vcd_file)) begin
-            $dumpfile (__vcd_file);
-            $dumpvars (0, e_proj_main_cell_test);
-        end
-        #1;
-    end
-    `endif
-    logic clk_n89;
-    assign clk_n89 = clk_i;
-    logic[4:0] inputs_n90;
-    assign inputs_n90 = inputs_i;
-    logic cfg_clk_n91;
-    assign cfg_clk_n91 = cfg_clk_i;
-    logic cfg_value_n92;
-    assign cfg_value_n92 = cfg_value_i;
-    (* src = "src/main.spade:13,16" *)
-    logic _e_131;
-    logic[1:0] _e_133_o;
-    (* src = "src/main.spade:11,17" *)
-    logic[1:0] chain_n93;
-    logic[1:0] chain_n93_o;
-    logic[2:0] _e_139;
-    (* src = "src/main.spade:19,12" *)
-    logic _e_137;
-    logic[2:0] _e_142;
-    (* src = "src/main.spade:20,12" *)
-    logic _e_140;
-    (* src = "src/main.spade:17,29" *)
-    logic[2:0] _e_146;
-    logic[1:0] _e_146_o;
-    logic _e_151;
-    logic[1:0] chain_n95;
-    logic[1:0] chain_n95_o;
-    (* src = "src/main.spade:25,9" *)
-    logic[1:0] _e_147_o;
-    logic[1:0] _e_149;
-    logic[7:0] _e_154;
-    logic[7:0] _e_156;
-    (* src = "src/main.spade:27,5" *)
-    logic[7:0] _e_150;
-    assign _e_131 = cfg_value_n92;
+    logic clk_n81;
+    assign clk_n81 = clk_i;
+    logic x_n82;
+    assign x_n82 = x_i;
+    logic y_n83;
+    assign y_n83 = y_i;
+    logic cfg_clk_n84;
+    assign cfg_clk_n84 = cfg_clk_i;
+    logic cfg_value_n85;
+    assign cfg_value_n85 = cfg_value_i;
+    (* src = "src/cell.spade:44,16" *)
+    logic _e_111;
+    logic[1:0] _e_113_o;
+    (* src = "src/cell.spade:42,13" *)
+    logic[1:0] c_n86;
+    logic[1:0] c_n86_o;
+    (* src = "src/cell.spade:48,24" *)
+    logic[2:0] _e_122;
+    logic[1:0] _e_122_o;
+    logic _e_126;
+    logic[1:0] chain_n88;
+    logic[1:0] chain_n88_o;
+    (* src = "src/cell.spade:49,9" *)
+    logic[1:0] _e_123_o;
+    logic[1:0] _e_125;
+    assign _e_111 = cfg_value_n85;
     
-    assign chain_n93 = {cfg_clk_n91, _e_131};
-    assign {_e_133_o} = chain_n93_o;
-    assign _e_139 = 0;
-    assign _e_137 = inputs_n90[_e_139];
-    assign _e_142 = 1;
-    assign _e_140 = inputs_n90[_e_142];
-    (* src = "src/main.spade:17,29" *)
-    e_proj_cell_cell _e_146_i(clk_n89, _e_137, _e_140, chain_n93, chain_n93_o, _e_146, _e_146_o);
-    assign _e_151 = _e_146[2];
-    assign chain_n95 = _e_146[1:0];
-    assign _e_146_o[1:0] = chain_n95_o;
-    assign chain_n95_o[1:0] = _e_147_o;
-    assign _e_149 = 0;
-    assign _e_147_o = _e_149;
-    assign _e_154 = 1;
-    assign _e_156 = 0;
-    assign _e_150 = _e_151 ? _e_154 : _e_156;
-    assign output__ = _e_150;
-endmodule
-
-module e_proj_config_chain_cfg_bit (
-        input[1:0] chain_i, output[1:0] chain_o,
-        output[2:0] output__,
-        input[1:0] input__
-    );
-    `ifdef COCOTB_SIM
-    string __top_module;
-    string __vcd_file;
-    initial begin
-        if ($value$plusargs("TOP_MODULE=%s", __top_module) && __top_module == "e_proj_config_chain_cfg_bit" && $value$plusargs("VCD_FILENAME=%s", __vcd_file)) begin
-            $dumpfile (__vcd_file);
-            $dumpvars (0, e_proj_config_chain_cfg_bit);
-        end
-        #1;
-    end
-    `endif
-    logic[1:0] chain_n61;
-    assign chain_n61 = chain_i;
-    logic[1:0] chain_n61_o;
-    assign chain_o = chain_n61_o;
-    (* src = "src/config_chain.spade:11,9" *)
-    logic _e_28;
-    (* src = "src/config_chain.spade:11,29" *)
-    logic _e_30;
-    (* src = "src/config_chain.spade:11,20" *)
-    reg value_n62;
-    (* src = "src/config_chain.spade:14,14" *)
-    logic _e_34;
-    (* src = "src/config_chain.spade:15,16" *)
-    logic _e_36;
-    (* src = "src/config_chain.spade:16,16" *)
-    logic[1:0] _e_38_o;
-    (* src = "src/config_chain.spade:13,21" *)
-    logic[1:0] new_chain_n63;
-    logic[1:0] new_chain_n63_o;
-    (* src = "src/config_chain.spade:18,6" *)
-    logic _e_42;
-    (* src = "src/config_chain.spade:18,6" *)
-    logic[2:0] _e_41;
-    logic[1:0] _e_41_o;
-    assign _e_28 = chain_n61[1];
-    assign _e_30 = chain_n61[0];
-    always @(posedge _e_28) begin
-        value_n62 <= _e_30;
-    end
-    assign _e_34 = chain_n61[1];
-    assign _e_36 = value_n62;
-    assign chain_n61_o[1:0] = _e_38_o;
-    assign new_chain_n63 = {_e_34, _e_36};
-    assign {_e_38_o} = new_chain_n63_o;
-    assign _e_42 = value_n62;
-    assign _e_41 = {_e_42, new_chain_n63};
-    assign {new_chain_n63_o} = _e_41_o;
-    assign output__ = _e_41;
-    assign _e_41_o = input__;
+    assign c_n86 = {cfg_clk_n84, _e_111};
+    assign {_e_113_o} = c_n86_o;
+    (* src = "src/cell.spade:48,24" *)
+    e_proj_cell_cell _e_122_i(clk_n81, x_n82, y_n83, c_n86, c_n86_o, _e_122, _e_122_o);
+    assign _e_126 = _e_122[2];
+    assign chain_n88 = _e_122[1:0];
+    assign _e_122_o[1:0] = chain_n88_o;
+    assign chain_n88_o[1:0] = _e_123_o;
+    assign _e_125 = 1;
+    assign _e_123_o = _e_125;
+    assign output__ = _e_126;
 endmodule
