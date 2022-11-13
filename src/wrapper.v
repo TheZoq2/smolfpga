@@ -3,11 +3,13 @@ module thezoq2_yafpga (
     output [7:0] io_out
     );
 
+    wire[3:0] dummy;
+
     e_main main
         ( .clk_i(io_in[0])
-        , .inputs_unsync_i(io_in[4:1])
-        , .cfg_value_i(io_in[5])
-        , .cfg_clk_i(io_in[6])
-        , .output__(io_out)
+        , .cfg_value_i(io_in[1])
+        , .cfg_clk_i(io_in[2])
+        , .inputs_unsync_i(io_in[7:3])
+        , .output__({dummy, io_out[3:0]})
         );
 endmodule
